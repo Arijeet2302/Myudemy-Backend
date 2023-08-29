@@ -21,7 +21,7 @@ class Courses(models.Model):
     author_name = models.CharField(max_length=500)
     rating = models.FloatField()
     price = models.FloatField()
-    image = models.ImageField(upload_to="myapp/images",default="")
+    image = models.ImageField(upload_to="static",default="")
 
 
     class Meta:
