@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-DATABASES["defualt"] = dj_database_url.config()
+DATABASES["default"] = dj_database_url.config()
 #Manually added
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
