@@ -1,5 +1,4 @@
 from django.shortcuts import render , HttpResponse
-from .firebase_utils import *
 from myapp.models import Cart ,Courses
 from rest_framework import viewsets , status
 from myapp.serializers import CartSerializer , CourseSerializer
