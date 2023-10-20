@@ -62,6 +62,21 @@ class CourseViewSet(viewsets.ModelViewSet):
     queryset = Courses.objects.all().order_by("course_id")
     serializer_class = CourseSerializer
 
+    data = [
+        {'course_id': 0, 'course_name': '100 Days of Code: The Complete Python Pro Bootcamp for 2023',
+         'author_name':'Dr. Angela Yu', 'rating':4.6, 'price':1280, 'image':'static/2776760_f176_10.jpg'},
+        {'course_id': 1, 'course_name': 'The complete Python Bootcamp From Zero To Hero',
+         'author_name':'Jose Protilla', 'rating':4.4, 'price':8640, 'image':'static/2485240_d405_7.jpg'},
+        {'course_id': 2, 'course_name': 'SQL Complete Bootcamp',
+         'author_name':'AI Sweigart', 'rating':4.2, 'price':8640, 'image':'static/762616_7693_3.jpg'},
+        {'course_id': 3, 'course_name': 'Python: Master Programming and Developement Within 15 Projects',
+         'author_name':'Dev Nirwal', 'rating':3.8, 'price':8640, 'image':'static/567828_67d0.jpg'},
+    ]
+
+    for element in data:
+        entry = Courses(**element)
+        entry.save()
+
 
 
 
