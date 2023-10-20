@@ -81,12 +81,8 @@ WSGI_APPLICATION = 'myudemybackend.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    'default': dj_database_url.config(default='postgres://default:L2qMPfOl1uvC@ep-summer-dawn-88753104-pooler.us-east-1.postgres.vercel-storage.com/verceldb')
     }
-}
-DATABASES["default"] = dj_database_url.config()
 #Manually added
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
