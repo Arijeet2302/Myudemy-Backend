@@ -21,6 +21,16 @@ class CartViewSet(viewsets.ModelViewSet):
     serializer_class = CartSerializer
     permission_classes = [AllowAny]
 
+    @action(detail=False, methods=['get'])
+    def show(self,request):
+        uid = request.query_params.get('uid')
+        
+        try:
+            cartItems = Cart.objects.filter(uid=uid)
+            return Response(CartSerializer(cartItems, many=True).data)
+        except Cart.DoesNotExist:
+            return Response({'message': 'No cart items found.'})
+
 
     @action(detail=False, methods=['post'])
     def increment_quantity(self, request):
@@ -42,21 +52,17 @@ class CartViewSet(viewsets.ModelViewSet):
                                 quantity=1
                                 )
             return Response({'message': 'new added'})
-        # except Cart.MultipleObjectsReturned:
-        #     course.quantity+=1
-
-    # @action(detail=False, methods=['delete'])
-    # def delete_cart(self,request):
-    #     response = HttpResponse(request)
-    #     response["Access-Control-Allow-Origin"] = "http://localhost:3000"
-    #     response["Access-Control-Allow-Methods"] = "DELETE"
-    #     response["Access-Control-Allow-Headers"] = "Content-Type"
-    #     return response
+       
     
-    def destroy(self, request, *args, **kwargs):
-        instance = self.get_object()
-        instance.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    @action(detail=False, methods=['delete'], url_path='delete')
+    def delete(self, request, *args, **kwargs):
+        try :
+            item_pk = request.query_params.get('item_no')
+            items = Cart.objects.get(pk=item_pk)
+            items.delete()
+            return Response({'message': 'Cart Item has been removed'})
+        except Cart.DoesNotExist:  
+            return Response({'message': 'No cart items found.'})
 
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Courses.objects.all().order_by("course_id")
@@ -76,19 +82,3 @@ class CourseViewSet(viewsets.ModelViewSet):
     for element in data:
         entry = Courses(**element)
         entry.save()
-
-
-
-
-
-
-
-
-
-
-
-    
-
-    
-
-
