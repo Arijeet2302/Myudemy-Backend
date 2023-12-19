@@ -45,12 +45,15 @@ class CartViewSet(viewsets.ModelViewSet):
             course.save()
             return Response({'message': 'Quantity incremented in cart.'})
         except Cart.DoesNotExist:
+            image_url = incoming_data['image']
+            relative_path = image_url.split("/static/")[-1]
+
             Cart.objects.create(uid=incoming_data['uid'], 
                                 course_name=incoming_data['course_name'], 
                                 cust_name=incoming_data['cust_name'], 
                                 price=incoming_data['price'], 
                                 author_name=incoming_data['author_name'], 
-                                image = incoming_data['image'],
+                                image = relative_path,
                                 quantity=1
                                 )
             return Response({'message': 'new added'})
