@@ -31,15 +31,16 @@ class Courses(models.Model):
         ]
 
     def __str__(self) :
-        return self.course_id
+        return f"{self.course_name} (ID: {self.course_id})"
     
-# class UserCourses(models.Model):
-#     id = models.AutoField(primary_key=True)
-#     uid = models.CharField(max_length=1000)
-#     cust_name = models.CharField(max_length=50)
-#     course_name = models.CharField(max_length=200)
-#     author_name = models.CharField(max_length=200,default="")
-#     image = models.ImageField(upload_to="static",default="")
+class UserCourses(models.Model):
+    id = models.AutoField(primary_key=True)
+    uid = models.CharField(max_length=1000)
+    cust_name = models.CharField(max_length=50)
+    course = models.ForeignKey(to='Courses', on_delete=models.CASCADE,default=0)
+    rating = models.FloatField()
+    author_name = models.CharField(max_length=200,default="")
+    image = models.ImageField(upload_to="static",default="")
 
-#     def __str__(self):
-#         return self.cust_name
+    def __str__(self):
+        return f"{self.cust_name} - {self.course.course_name} (Rating: {self.rating})"
