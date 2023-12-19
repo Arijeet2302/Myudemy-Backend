@@ -93,3 +93,38 @@ class UserCoursesViewSet(viewsets.ModelViewSet):
     queryset = UserCourses.objects.all().order_by("cust_name")
     serializer_class = UserCourseSerializer
     permission_classes = [AllowAny]
+
+    @action(detail=False, methods=['get'])
+    def show(self,request):
+        uid = request.query_params.get('uid')
+        
+        try:
+            cartItems = UserCourses.objects.filter(uid=uid)
+            serializer = UserCourseSerializer(cartItems, many=True, context={'request': request})
+            return Response(serializer.data)
+        except UserCourses.DoesNotExist:
+            return Response({'message': 'No cart items found.'} , status=status.HTTP_404_NOT_FOUND)
+
+    @action(detail=False, methods=['post'])
+    def add_UserCourse(self, request):
+        data = request.data
+
+        courseId = data['course_id']
+
+        try:
+            for i in courseId:
+                course_detailes = Courses.objects.get(pk=i)
+                UserCourses.objects.create(
+                    uid=data['uid'],
+                    cust_name=data['cust_name'],
+                    course_name=course_detailes.course_name,
+                    author_name=course_detailes.author_name,
+                    rating=course_detailes.rating,
+                    image=course_detailes.image,
+                )
+                items = Cart.objects.get(uid=data['uid'], course_name=course_detailes.course_name)
+                items.delete()
+            return Response({'message': 'Courses Added'})
+        
+        except Exception:
+            return Response({'message': 'Something went wrong'})

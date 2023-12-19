@@ -16,4 +16,4 @@ class CourseSerializer(serializers.HyperlinkedModelSerializer):
 class UserCourseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = UserCourses
-        fields = ['id','course_id','uid','course_name','author_name','price','rating','image']
+        fields = '__all__'

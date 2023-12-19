@@ -37,10 +37,10 @@ class UserCourses(models.Model):
     id = models.AutoField(primary_key=True)
     uid = models.CharField(max_length=1000)
     cust_name = models.CharField(max_length=50)
-    course = models.ForeignKey(to='Courses', on_delete=models.CASCADE,default=0)
-    rating = models.FloatField()
+    course_name = models.CharField(default="")
+    rating = models.FloatField(default=0)
     author_name = models.CharField(max_length=200,default="")
     image = models.ImageField(upload_to="static",default="")
 
     def __str__(self):
-        return f"{self.cust_name} - {self.course.course_name} (Rating: {self.rating})"
+        return self.cust_name
