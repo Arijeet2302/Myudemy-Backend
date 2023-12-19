@@ -46,7 +46,7 @@ class CartViewSet(viewsets.ModelViewSet):
             return Response({'message': 'Quantity incremented in cart.'})
         except Cart.DoesNotExist:
             image_url = incoming_data['image']
-            relative_path = image_url.split("/static/")[-1]
+            relative_path = image_url.split("https://myudemy-backend.vercel.app/")[-1]
 
             Cart.objects.create(uid=incoming_data['uid'], 
                                 course_name=incoming_data['course_name'], 
