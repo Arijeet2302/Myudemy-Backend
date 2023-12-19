@@ -11,6 +11,7 @@ class Cart(models.Model):
     author_name = models.CharField(max_length=200,default="")
     price = models.FloatField()
     quantity = models.IntegerField(default=1)
+    image = models.ImageField(upload_to="static",default="")
 
     def __str__(self):
         return self.cust_name

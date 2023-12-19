@@ -49,6 +49,7 @@ class CartViewSet(viewsets.ModelViewSet):
                                 cust_name=incoming_data['cust_name'], 
                                 price=incoming_data['price'], 
                                 author_name=incoming_data['author_name'], 
+                                image = incoming_data['image'],
                                 quantity=1
                                 )
             return Response({'message': 'new added'})
