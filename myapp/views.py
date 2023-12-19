@@ -49,7 +49,7 @@ class CartViewSet(viewsets.ModelViewSet):
             relative_path = image_url.split("https://myudemy-backend.vercel.app/")[-1]
 
             Cart.objects.create(uid=incoming_data['uid'], 
-                                course_id_id=incoming_data['course_id'],
+                                course_id=incoming_data['course_id'],
                                 course_name=incoming_data['course_name'], 
                                 cust_name=incoming_data['cust_name'], 
                                 price=incoming_data['price'], 

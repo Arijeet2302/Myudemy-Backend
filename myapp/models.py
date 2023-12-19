@@ -5,7 +5,7 @@ from django.db import models
 class Cart(models.Model):
     id = models.AutoField(primary_key=True)
     uid = models.CharField(max_length=1000)
-    course_id = models.ForeignKey("Courses",on_delete=models.SET_NULL,null=True) 
+    course_id = models.ForeignKey(default=0,to='Courses',on_delete=models.CASCADE) 
     cust_name = models.CharField(max_length=50)
     course_name = models.CharField(max_length=200)
     author_name = models.CharField(max_length=200,default="")
@@ -31,4 +31,15 @@ class Courses(models.Model):
         ]
 
     def __str__(self) :
-        return self.course_name
+        return self.course_id
+    
+# class UserCourses(models.Model):
+#     id = models.AutoField(primary_key=True)
+#     uid = models.CharField(max_length=1000)
+#     cust_name = models.CharField(max_length=50)
+#     course_name = models.CharField(max_length=200)
+#     author_name = models.CharField(max_length=200,default="")
+#     image = models.ImageField(upload_to="static",default="")
+
+#     def __str__(self):
+#         return self.cust_name
