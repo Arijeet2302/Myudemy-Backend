@@ -10,6 +10,7 @@ router = DefaultRouter()
 router.register(r'cart', views.CartViewSet)
 # router.register(r'cart\delete_cart', views.CartViewSet.delete_cart)
 router.register(r'course', views.CourseViewSet)
+router.register(r'user/course', views.UserCoursesViewSet)
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [

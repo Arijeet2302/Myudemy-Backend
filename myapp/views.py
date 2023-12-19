@@ -1,7 +1,7 @@
 from django.shortcuts import render , HttpResponse
-from myapp.models import Cart ,Courses
+from myapp.models import Cart ,Courses, UserCourses
 from rest_framework import viewsets , status
-from myapp.serializers import CartSerializer , CourseSerializer
+from myapp.serializers import CartSerializer , CourseSerializer, UserCourseSerializer
 from rest_framework.permissions import AllowAny
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -88,3 +88,8 @@ class CourseViewSet(viewsets.ModelViewSet):
     for element in data:
         entry = Courses(**element)
         entry.save()
+
+class UserCoursesViewSet(viewsets.ModelViewSet):
+    queryset = UserCourses.objects.all().order_by("cust_name")
+    serializer_class = UserCourseSerializer
+    permission_classes = [AllowAny]

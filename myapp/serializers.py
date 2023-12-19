@@ -1,4 +1,4 @@
-from .models import Cart ,Courses
+from .models import Cart ,Courses, UserCourses
 from rest_framework import serializers
 
 
@@ -12,3 +12,8 @@ class CourseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Courses
         fields = ['course_id','course_name','price','author_name','rating','image']
+
+class UserCourseSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = UserCourses
+        fields = ['id','course_id','uid','course_name','author_name','price','rating','image']
