@@ -27,7 +27,8 @@ class CartViewSet(viewsets.ModelViewSet):
         
         try:
             cartItems = Cart.objects.filter(uid=uid)
-            return Response(CartSerializer(cartItems, many=True).data)
+            serializer = CartSerializer(cartItems, many=True, context={'request': request})
+            return Response(serializer.data)
         except Cart.DoesNotExist:
             return Response({'message': 'No cart items found.'})
 
