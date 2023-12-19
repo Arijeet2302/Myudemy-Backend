@@ -5,7 +5,7 @@ from rest_framework import serializers
 class CartSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Cart
-        fields = "__all__"
+        fields = ['course_id','uid', 'cust_name', 'course_name','author_name','price','quantity','id','image']
 
 
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
